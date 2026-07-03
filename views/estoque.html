@@ -1,0 +1,21 @@
+
+<section id="page-estoque" class="page">
+  <div class="page-header">
+    <h1>Estoque</h1>
+    <p>Controle de entradas e situação do estoque</p>
+  </div>
+  <div class="card">
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+        <input placeholder="Buscar produtos..." oninput="Controllers.estoque.q=this.value;Controllers.estoque.render()">
+      </div>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Produto</th><th>Qtd. Atual</th><th>Estoque Mín.</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody id="stock-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+/* Cards de resumo no modal de histórico */
+.client-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.client-summary-card {
+  background: var(--cream-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+.client-summary-label { font-size: .74rem; color: var(--text-secondary); margin-bottom: 4px; }
+.client-summary-value { font-size: 1.15rem; font-weight: 700; }
+
+@media (max-width: 600px) {
+  .client-summary-grid { grid-template-columns: repeat(2, 1fr); }
+}

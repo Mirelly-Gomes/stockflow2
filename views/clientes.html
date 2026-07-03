@@ -1,0 +1,25 @@
+
+<section id="page-clientes" class="page">
+  <div class="page-header">
+    <h1>Clientes</h1>
+    <p>Cadastro e gestão de clientes</p>
+  </div>
+  <div class="card">
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+        <input placeholder="Buscar por nome..." oninput="Controllers.clientes.q=this.value;Controllers.clientes.render()">
+      </div>
+      <button class="btn btn-primary" onclick="Controllers.clientes.new()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+        Novo Cliente
+      </button>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Nome</th><th>Pedidos</th><th>Total Gasto</th><th>Ações</th></tr></thead>
+        <tbody id="clients-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>

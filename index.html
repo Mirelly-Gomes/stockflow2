@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockFlow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+
+
+<button id="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Menu">
+  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+  </svg>
+</button>
+
+<!-- SIDEBAR -->
+<aside id="sidebar">
+  <div class="sidebar-logo">StockFlow</div>
+  <nav>
+    <a href="#" data-page="dashboard" class="active">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </a>
+    <a href="#" data-page="produtos">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"/></svg>
+      Produtos
+    </a>
+    <a href="#" data-page="categorias">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+      Categorias
+    </a>
+    <a href="#" data-page="estoque">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+      Estoque
+    </a>
+    <a href="#" data-page="clientes">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path stroke-linecap="round" stroke-linejoin="round" d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"/></svg>
+      Clientes
+    </a>
+    <a href="#" data-page="pedidos">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      Pedidos
+    </a>
+    <a href="#" data-page="financeiro">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>
+      Financeiro
+    </a>
+  </nav>
+</aside>
+
+<!-- MAIN-->
+<main id="main"></main>
+
+
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)Modal.close()">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title"></h2>
+      <button class="modal-close" onclick="Modal.close()" aria-label="Fechar">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- MODAL PEDIDO  -->
+<div class="modal-overlay" id="modal-pedido-overlay" onclick="if(event.target===this)Controllers.pedidos.closeModal()">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-pedido-title">Novo Pedido</h2>
+      <button class="modal-close" onclick="Controllers.pedidos.closeModal()" aria-label="Fechar">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="form-grid" style="margin-bottom:16px">
+      <div class="form-group"><label>Cliente *</label><select id="ped-cliente"></select></div>
+      <div class="form-group"><label>Status</label>
+        <select id="ped-status"><option value="Em aberto">Em aberto</option><option value="Quitado">Quitado</option></select>
+      </div>
+      <div class="form-group full"><label>Observações</label>
+        <textarea id="ped-obs" placeholder="Observações do pedido..." rows="2"></textarea>
+      </div>
+    </div>
+    <div class="section-title" style="font-size:.88rem;margin-bottom:8px">Itens do Pedido</div>
+    <div style="display:flex;gap:10px;align-items:flex-end;margin-bottom:14px">
+      <div class="form-group" style="flex:1"><label>Produto</label><select id="ped-produto"></select></div>
+      <div class="form-group" style="flex:0 0 80px"><label>Qtd</label><input type="number" id="ped-qtd-item" value="1" min="1"></div>
+      <button type="button" class="btn btn-outline" onclick="Controllers.pedidos.addItem()">Adicionar</button>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>Produto</th><th>Qtd</th><th>Unit.</th><th>Subtotal</th><th></th></tr></thead>
+        <tbody id="ped-itens-tbody">
+          <tr><td colspan="5"><div class="empty-state" style="padding:24px"><p>Nenhum item adicionado.</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="text-align:right;font-weight:700;font-size:1.05rem;margin-top:12px">
+      Total: <span id="ped-total" style="color:var(--green-accent)">R$ 0,00</span>
+    </div>
+    <div class="form-actions">
+      <button type="button" class="btn btn-danger" id="ped-btn-excluir" style="display:none;margin-right:auto" onclick="Controllers.pedidos.deleteCurrent()">Excluir Pedido</button>
+      <button type="button" class="btn btn-outline" onclick="Controllers.pedidos.closeModal()">Cancelar</button>
+      <button type="button" class="btn btn-primary" onclick="Controllers.pedidos.save()">Salvar Pedido</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-container"></div>
+
+<!-- SCRIPTS -->
+<script src="assets/js/api.js"></script>
+<script src="assets/js/utils.js"></script>
+<script src="controllers/controllers.js"></script>
+<script>
+  
+  // ── Router com carregamento dinâmico de views ──
+  
+  const VIEWS = ['dashboard','produtos','categorias','estoque','clientes','pedidos','financeiro'];
+  const viewCache = {};
+
+  async function loadView(page) {
+    if (viewCache[page]) return viewCache[page];
+    const res = await fetch(`views/${page}.html`);
+    const html = await res.text();
+    viewCache[page] = html;
+    return html;
+  }
+
+  async function goTo(page) {
+    // Carrega o HTML 
+    const html = await loadView(page);
+    const main = document.getElementById('main');
+
+    // Esconde todas as pages injetadas anteriormente
+    main.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+
+    // Verifica 
+    let section = main.querySelector(`#page-${page}`);
+    if (!section) {
+      // Primeira visita: injeta o HTML e cria o elemento
+      const temp = document.createElement('div');
+      temp.innerHTML = html;
+      section = temp.firstElementChild;
+      main.appendChild(section);
+    }
+
+    section.style.display = '';
+
+    // Atualiza nav ativa
+    document.querySelectorAll('nav a').forEach(a =>
+      a.classList.toggle('active', a.dataset.page === page)
+    );
+    // Fecha sidebar mobile
+    document.getElementById('sidebar').classList.remove('open');
+
+    // Renderiza o controller da página
+    Controllers[page]?.render();
+  }
+
+  // Navegação
+  document.querySelectorAll('nav a').forEach(a => {
+    a.addEventListener('click', e => { e.preventDefault(); goTo(a.dataset.page); });
+  });
+
+  // Fecha sidebar ao clicar fora (mobile
+  document.addEventListener('click', (e) => {
+    const sidebar = document.getElementById('sidebar');
+    const toggle  = document.getElementById('menu-toggle');
+    if (window.innerWidth <= 768 && sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+      sidebar.classList.remove('open');
+    }
+  });
+
+  // Carrega dashboard na inicialização
+  goTo('dashboard');
+</script>
+</body>
+</html>

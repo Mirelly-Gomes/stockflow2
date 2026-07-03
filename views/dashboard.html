@@ -1,0 +1,96 @@
+
+<section id="page-dashboard" class="page">
+  <div class="page-header">
+    <h1>Dashboard</h1>
+    <p>Visão geral do seu negócio</p>
+  </div>
+
+  <!-- KPIs -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="var(--green-accent)">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Total de Vendas</div>
+        <div class="stat-value" id="kpi-sales">—</div>
+        <div class="stat-delta">▲ pedidos quitados</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="var(--green-accent)">
+          <circle cx="12" cy="12" r="10"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Lucro Líquido</div>
+        <div class="stat-value" id="kpi-profit">—</div>
+        <div class="stat-delta">▲ venda − custo</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="var(--green-accent)">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Pedidos</div>
+        <div class="stat-value" id="kpi-orders">—</div>
+        <div class="stat-delta">▲ total registrado</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">
+        <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" color="var(--green-accent)">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10"/>
+        </svg>
+      </div>
+      <div class="stat-info">
+        <div class="stat-label">Itens em Estoque</div>
+        <div class="stat-value" id="kpi-stock">—</div>
+        <div class="stat-delta" style="color:var(--text-secondary)">Produtos cadastrados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos -->
+  <div class="charts-row">
+    <div class="card">
+      <div class="section-title">Vendas por mês (R$)</div>
+      <div class="chart-wrap"><canvas id="chart-sales"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="section-title">Lucro por categoria</div>
+      <div style="display:flex;gap:20px;align-items:center">
+        <div style="width:160px;height:160px;flex-shrink:0"><canvas id="chart-category"></canvas></div>
+        <div id="category-legend" class="donut-legend" style="flex:1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Linha inferior -->
+  <div class="bottom-row">
+    <div class="card">
+      <div class="section-title">Top 5 produtos mais vendidos</div>
+      <div style="display:flex;justify-content:flex-end;font-size:.78rem;color:var(--text-secondary);margin-bottom:4px;">Quantidade</div>
+      <ul class="top5-list" id="top5"></ul>
+    </div>
+    <div class="card">
+      <div class="section-title">Status dos pedidos</div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <div style="width:160px;height:160px"><canvas id="chart-status"></canvas></div>
+        <div id="status-legend" class="donut-legend" style="width:100%"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">Alertas de estoque
+        <span style="font-size:.78rem;font-weight:400;color:var(--text-secondary)">(estoque baixo)</span>
+      </div>
+      <div id="alerts"></div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,29 @@
+
+<section id="page-produtos" class="page">
+  <div class="page-header">
+    <h1>Produtos</h1>
+    <p>Gerencie o catálogo de produtos</p>
+  </div>
+  <div class="card">
+    <div class="toolbar">
+      <div class="search-box">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="M21 21l-4.35-4.35"/></svg>
+        <input placeholder="Buscar produtos..." oninput="Controllers.produtos.q=this.value;Controllers.produtos.render()">
+      </div>
+      <button class="btn btn-primary" onclick="Controllers.produtos.new()">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" d="M12 5v14M5 12h14"/></svg>
+        Novo Produto
+      </button>
+    </div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th><th>Categoria</th><th>Custo</th><th>Venda</th><th>Estoque</th><th>Vendas</th><th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="produtos-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
