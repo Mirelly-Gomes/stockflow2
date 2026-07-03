@@ -1,8 +1,8 @@
 # StockFlow
 
-Sistema de gestão de estoque, vendas e financeiro para pequenos negócios (ex.: revenda de cosméticos), com dashboard de indicadores, controle de produtos, categorias, clientes e pedidos.
+Sistema de gestão de estoque, vendas e financeiro para pequenos negócios, com dashboard de indicadores, controle de produtos, categorias, clientes e pedidos.
 
-## ✨ Funcionalidades
+##  Funcionalidades
 
 - **Dashboard**: KPIs de vendas, custo, lucro líquido, pedidos (quitados/em aberto), produtos mais vendidos, alertas de estoque baixo, lucro por categoria e vendas mensais.
 - **Produtos**: cadastro com preço de custo, preço de venda, estoque atual, estoque mínimo e quantidade vendida.
@@ -12,7 +12,7 @@ Sistema de gestão de estoque, vendas e financeiro para pequenos negócios (ex.:
 - **Pedidos**: criação de pedidos com múltiplos itens, forma de pagamento e status (*Em aberto* / *Quitado*).
 - **Financeiro**: visão consolidada de receitas, custos e lucro a partir dos pedidos quitados.
 
-## 🧱 Arquitetura
+##  Arquitetura
 
 Aplicação full-stack simples, com front-end estático servido pelo próprio back-end Node/Express.
 
@@ -40,14 +40,14 @@ stockflow2/
 ```
 
 ### Front-end
-HTML, CSS e JavaScript puro (sem framework). O `index.html` monta a estrutura com menu lateral e carrega as views correspondentes a cada seção do sistema.
+HTML, CSS e JavaScript. O `index.html` monta a estrutura com menu lateral e carrega as views correspondentes a cada seção do sistema.
 
 ### Back-end
 - **Node.js + Express** expondo uma API REST em `/api`.
 - **Banco de dados**: SQLite manipulado via `sql.js`, persistido em arquivo (`backend/db/stockflow.db`) a cada escrita.
 - Na primeira execução, o schema é criado automaticamente e o banco é populado com dados de exemplo (categorias, produtos, clientes e pedidos), caso esteja vazio.
 
-## 🗄️ Modelo de dados
+##  Modelo de dados
 
 | Tabela | Descrição |
 |---|---|
@@ -57,7 +57,7 @@ HTML, CSS e JavaScript puro (sem framework). O `index.html` monta a estrutura co
 | `orders` | Pedidos (cliente, data, status, forma de pagamento) |
 | `order_items` | Itens de cada pedido (produto, quantidade, preço e custo unitários) |
 
-## 🔌 API
+##  API
 
 Base: `/api`
 
@@ -69,7 +69,7 @@ Base: `/api`
 | Clientes | `GET`, `POST /clients` · `GET`, `PUT`, `DELETE /clients/:id` · `GET /clients/:id/orders` |
 | Pedidos | `GET`, `POST /orders` · `GET`, `PUT`, `DELETE /orders/:id` · `PATCH /orders/:id/status` |
 
-## 🚀 Como executar
+##  Como executar
 
 Pré-requisitos: [Node.js](https://nodejs.org/) instalado.
 
@@ -88,14 +88,14 @@ npm run dev
 
 O servidor sobe em `http://localhost:3000` (porta configurável pela variável de ambiente `PORT`) e já serve o front-end junto com a API.
 
-## 🛠️ Tecnologias
+##  Tecnologias
 
 - Node.js, Express
 - sql.js (SQLite via WebAssembly)
 - CORS
-- HTML, CSS e JavaScript vanilla
+- HTML, CSS , Chart.js  e JavaScript 
 
-## 📌 Observações
+##  Observações
 
 - O banco de dados é um arquivo local (`backend/db/stockflow.db`); ao apagá-lo, o sistema recria o schema e os dados de exemplo na próxima inicialização.
 - Não há autenticação implementada — recomendado para uso local/demonstração; para produção, avaliar adicionar controle de acesso.
